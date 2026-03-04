@@ -6,7 +6,7 @@ This project demonstrates how to deploy an **NGINX web server on a Google Cloud 
 
 A virtual machine running **Ubuntu Linux** hosts the NGINX server, and users can access the website through the VM’s **external IP address**.
 
-This project showcases basic **cloud networking, firewall configuration, and Linux server administration** using Google Cloud Platform.
+This project demonstrates basic **cloud networking, firewall configuration, and Linux server administration** using Google Cloud Platform.
 
 ---
 
@@ -38,7 +38,6 @@ gcp-nginx-firewall-webserver
 │
 ├── README.md
 ├── architecture-diagram.png
-├── Task.pdf
 │
 └── screenshots
     ├── vm-instance.png
@@ -88,7 +87,7 @@ Screenshot:
 
 ### 3. Connect to the VM Using SSH
 
-The VM instance was accessed through the **Google Cloud Console SSH terminal**.
+The VM instance was accessed using the **Google Cloud Console SSH terminal**.
 
 Screenshot:
 
@@ -111,7 +110,7 @@ sudo apt install nginx -y
 
 ### 5. Start and Enable NGINX
 
-The NGINX service was started and configured to start automatically at boot.
+The NGINX service was started and configured to run automatically when the VM starts.
 
 ```
 sudo systemctl start nginx
@@ -146,7 +145,7 @@ Screenshot:
 
 ### 7. Access the Website via Browser
 
-The NGINX web server was accessed from a browser using the VM's external IP address.
+The NGINX web server was accessed from a browser using the VM’s **external IP address**.
 
 Example:
 
@@ -170,11 +169,11 @@ The NGINX page was not accessible initially from the browser.
 
 ### Cause
 
-HTTP traffic was blocked because the VM was created without enabling HTTP access or a firewall rule.
+HTTP traffic was blocked because the VM was created without allowing HTTP traffic or without a firewall rule.
 
 ### Solution
 
-A firewall rule was created allowing incoming HTTP traffic on port 80.
+A firewall rule was created allowing incoming HTTP traffic.
 
 Configuration:
 
@@ -182,7 +181,7 @@ Protocol: TCP
 Port: 80
 Source: 0.0.0.0/0
 
-After creating the firewall rule, the NGINX page became accessible from the browser.
+After applying the firewall rule, the NGINX web server became accessible.
 
 ---
 
@@ -215,7 +214,7 @@ curl localhost
 * Deploy multiple NGINX servers
 * Configure HTTP Load Balancer
 * Containerize NGINX using Docker
-* Deploy the application using Kubernetes
+* Deploy using Kubernetes
 * Automate infrastructure using Terraform
 
 ---
@@ -223,3 +222,4 @@ curl localhost
 ## Author
 
 Sravan A L
+
