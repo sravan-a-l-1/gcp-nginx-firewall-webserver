@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project demonstrates how to deploy an **NGINX web server on a Google Cloud Compute Engine VM** and configure **VPC firewall rules** to allow HTTP traffic from the internet.
+This project demonstrates how to deploy an **NGINX web server on a Google Cloud Compute Engine virtual machine** and configure **VPC firewall rules** to allow HTTP traffic from the internet.
 
 A virtual machine running **Ubuntu Linux** hosts the NGINX server, and users can access the website through the VM’s **external IP address**.
 
@@ -12,92 +12,69 @@ This project demonstrates basic **cloud networking, firewall configuration, and 
 
 ## Architecture
 
-![Architecture Diagram](architecture-diagram.png)
-
-### Architecture Flow
-
-Internet User → Firewall Rule (Allow TCP:80) → Compute Engine VM → NGINX Web Server
+Internet User  
+↓  
+Firewall Rule (Allow TCP Port 80)  
+↓  
+Compute Engine Virtual Machine  
+↓  
+NGINX Web Server  
 
 ---
 
 ## Services Used
 
-* Google Cloud Compute Engine
-* VPC Network
-* Firewall Rules
-* Ubuntu Linux
-* NGINX Web Server
-* SSH
-
----
-
-## Project Structure
-
-```
-gcp-nginx-firewall-webserver
-│
-├── README.md
-├── architecture-diagram.png
-│
-└── screenshots
-    ├── vm-instance.png
-    ├── firewall-rule.png
-    ├── ssh-terminal.png
-    ├── nginx-status.png
-    ├── curl-test.png
-    └── nginx-browser.png
-```
+- Google Cloud Compute Engine
+- VPC Network
+- Firewall Rules
+- Ubuntu Linux
+- NGINX Web Server
+- SSH
 
 ---
 
 ## Implementation Steps
 
-### 1. Create a VM Instance
+### 1. Create a Virtual Machine
 
 A Compute Engine virtual machine was created with the following configuration:
 
-Name: nginx-server
-Machine type: e2-micro
-Region: us-central1
-Boot disk: Ubuntu Linux
-External IP: Enabled
+Name: nginx-server  
+Machine type: e2-micro  
+Region: us-central1  
+Boot disk: Ubuntu Linux  
+External IP: Enabled  
 
-Screenshot:
-
-![VM Instance](screenshots/vm-instance.png)
+This VM hosts the NGINX web server.
 
 ---
 
-### 2. Create Firewall Rule
+### 2. Create a Firewall Rule
 
 A firewall rule was created to allow HTTP traffic from the internet.
 
 Configuration:
 
-Direction: Ingress
-Source IP Range: 0.0.0.0/0
-Protocol: TCP
-Port: 80
+Direction: Ingress  
+Source IP Range: 0.0.0.0/0  
+Protocol: TCP  
+Port: 80  
 
-Screenshot:
-
-![Firewall Rule](screenshots/firewall-rule.png)
+This allows users on the internet to access the web server running on the VM.
 
 ---
 
 ### 3. Connect to the VM Using SSH
 
-The VM instance was accessed using the **Google Cloud Console SSH terminal**.
+The virtual machine was accessed using SSH from the Google Cloud Console.
 
-Screenshot:
-
-![SSH Terminal](screenshots/ssh-terminal.png)
+SSH allows secure remote access to the Linux server for installation and configuration.
 
 ---
 
 ### 4. Install NGINX
 
-NGINX was installed using the apt package manager.
+NGINX was installed using the Ubuntu package manager.
 
 Commands used:
 
@@ -110,42 +87,36 @@ sudo apt install nginx -y
 
 ### 5. Start and Enable NGINX
 
-The NGINX service was started and configured to run automatically when the VM starts.
+The NGINX service was started and configured to run automatically when the VM boots.
 
 ```
 sudo systemctl start nginx
 sudo systemctl enable nginx
 ```
 
-Service status was verified using:
+To verify the service status:
 
 ```
 sudo systemctl status nginx
 ```
 
-Screenshot:
-
-![NGINX Status](screenshots/nginx-status.png)
-
 ---
 
 ### 6. Test the Web Server Locally
 
-The web server was tested inside the VM using curl.
+The web server was tested inside the virtual machine using curl.
 
 ```
 curl localhost
 ```
 
-Screenshot:
-
-![Curl Test](screenshots/curl-test.png)
+If NGINX is running correctly, the command returns the default NGINX HTML page.
 
 ---
 
-### 7. Access the Website via Browser
+### 7. Access the Website from a Browser
 
-The NGINX web server was accessed from a browser using the VM’s **external IP address**.
+The website can be accessed by entering the VM’s external IP address in a browser.
 
 Example:
 
@@ -153,11 +124,7 @@ Example:
 http://EXTERNAL-IP
 ```
 
-The NGINX welcome page was successfully displayed.
-
-Screenshot:
-
-![NGINX Webpage](screenshots/nginx-browser.png)
+The NGINX welcome page confirms that the web server is successfully deployed.
 
 ---
 
@@ -165,23 +132,23 @@ Screenshot:
 
 ### Issue
 
-The NGINX page was not accessible initially from the browser.
+The NGINX page may not be accessible from the browser.
 
 ### Cause
 
-HTTP traffic was blocked because the VM was created without allowing HTTP traffic or without a firewall rule.
+HTTP traffic may be blocked because no firewall rule allows port 80.
 
 ### Solution
 
-A firewall rule was created allowing incoming HTTP traffic.
+Create a firewall rule allowing incoming HTTP traffic.
 
 Configuration:
 
-Protocol: TCP
-Port: 80
-Source: 0.0.0.0/0
+Protocol: TCP  
+Port: 80  
+Source Range: 0.0.0.0/0  
 
-After applying the firewall rule, the NGINX web server became accessible.
+After applying the firewall rule, the NGINX web server becomes accessible.
 
 ---
 
@@ -200,26 +167,25 @@ curl localhost
 
 ## Skills Demonstrated
 
-* Google Cloud Compute Engine
-* VPC Networking
-* Firewall Configuration
-* Linux Server Administration
-* Web Server Deployment
-* Cloud Troubleshooting
+- Google Cloud Compute Engine
+- VPC Networking
+- Firewall Configuration
+- Linux Server Administration
+- Web Server Deployment
+- Cloud Troubleshooting
 
 ---
 
 ## Future Improvements
 
-* Deploy multiple NGINX servers
-* Configure HTTP Load Balancer
-* Containerize NGINX using Docker
-* Deploy using Kubernetes
-* Automate infrastructure using Terraform
+- Deploy multiple NGINX servers
+- Configure an HTTP Load Balancer
+- Containerize NGINX using Docker
+- Deploy using Kubernetes
+- Automate infrastructure using Terraform
 
 ---
 
 ## Author
 
 Sravan A L
-
