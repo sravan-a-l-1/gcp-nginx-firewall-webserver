@@ -153,6 +153,4 @@ curl localhost
 ## Author
 
 Sravan A L
-B.Tech CSE (IoT)
-Manipal University Jaipur
-Aspiring Cloud / DevOps Engineer
+
